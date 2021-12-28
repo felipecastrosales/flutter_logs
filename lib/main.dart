@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Logs in Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -35,10 +36,40 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void _incrementCounter() async {
+  final timelineTask = developer.TimelineTask();
+  timelineTask.start('_incrementCounter');
+    try {
+      // developer.Timeline.startSync('_incrementCounter');
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
+      print('calling _incrementCounter');
+      // int.parse('abc');
+      developer.log(
+        'calling _incrementCounter',
+        name: 'felipecastrosales',
+        error: 'sending error',
+      );
+      developer.inspect(_counter);
+      developer.debugger();
+      developer.debugger(when: _counter > 2);
+      setState(() {
+        _counter++;
+      });
+      developer.inspect(this);
+      developer.inspect(_counter);
+    } catch (e, s) {
+      developer.log(
+        'error in _incrementCounter',
+        name: 'felipecastrosales',
+        error: e.toString(),
+        stackTrace: s,
+      );
+    }
+    // developer.Timeline.finishSync();
+    timelineTask.finish();
+
   }
 
   @override
