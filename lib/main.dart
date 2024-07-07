@@ -1,4 +1,5 @@
 import 'dart:developer' as developer;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,7 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
       await Future.delayed(
         const Duration(seconds: 2),
       );
-      print('calling _incrementCounter');
+      if (kDebugMode) {
+        print('calling _incrementCounter');
+      }
       // int.parse('abc');
       developer.log(
         'calling _incrementCounter',
