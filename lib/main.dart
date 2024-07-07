@@ -8,7 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
   final String title;
 
   @override
@@ -37,8 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() async {
-  final timelineTask = developer.TimelineTask();
-  timelineTask.start('_incrementCounter');
+    final timelineTask = developer.TimelineTask();
+    timelineTask.start('_incrementCounter');
     try {
       // developer.Timeline.startSync('_incrementCounter');
       await Future.delayed(
@@ -69,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     // developer.Timeline.finishSync();
     timelineTask.finish();
-
   }
 
   @override
@@ -87,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
